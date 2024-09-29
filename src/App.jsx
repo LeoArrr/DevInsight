@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import "./App.scss";
+import './output.css';
 
 // components
 import Header from "./Components/Header/Header";
@@ -42,7 +42,7 @@ function App() {
     <Router>
       <div className="DevApp">
 {<Header/>}
-{<nteractionBox/>}
+{<InteractionBox/>}
 <main>
         <Routes>
           <Route path="/" element={<Home/>} />
