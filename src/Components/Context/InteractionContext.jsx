@@ -1,25 +1,29 @@
-import React, { useContext, createContext, useState } from "react";
+import React, { createContext, useContext, useState } from "react";
 
+// Create the context
 const InteractionContext = createContext();
 
+// Provider component to wrap around parts of the app that need access to notifications
 export const InteractionProvider = ({ children }) => {
-  const [message, setMessage] = useState([]);
+  const [message, setMessage] = useState(""); // Storing a single message (string)
 
-  const updateMessage = (message) => {
-    setMessage((prevMessage) => [...prevMessage, message]);
+  // Function to update the message
+  const updateMessage = (newMessage) => {
+    setMessage(newMessage);
   };
 
+  // Function to remove the message (or clear it)
   const removeMessage = () => {
-    setMessage((prevMessage) => prevMessage.slice(1));
+    setMessage(""); // Reset message to an empty string
   };
 
+  // The values provided by the context
   return (
-    <InteractionMessage.Provider
-      value={{ message, updateMessage, removeMessage }}
-    >
+    <InteractionContext.Provider value={{ message, updateMessage, removeMessage }}>
       {children}
-    </InteractionMessage.Provider>
+    </InteractionContext.Provider>
   );
 };
-export const userInteraction = () => useContext(InteractionContext);
-//new function scope because you want to call useContext everytime when userInteraction is triggered
+
+// Custom hook to use the interaction context in other components
+export const useInteraction = () => useContext(InteractionContext);
