@@ -1,11 +1,5 @@
 import { createRoot } from "react-dom/client";
 import App from "./App.jsx";
-import "./main.css";
-import { InteractionProvider } from "./Components/Context/InteractionContext.jsx";
+import "./output.css";
 
-//provider covers the entire app
-createRoot(document.getElementById("root")).render(
-  <InteractionProvider>
-    <App />
-  </InteractionProvider>
-);
+createRoot(document.getElementById("root")).render(<App />);

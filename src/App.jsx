@@ -1,26 +1,16 @@
 import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./output.css";
-
 // components
 import Header from "./Components/Header/Header";
-import InteractionBox from "./Components/Interaction/InteractionBox";
 import Home from "./Components/Home/Home";
 import Search from "./Components/Search/Search";
 import Favorite from "./Components/Favorite/Favorite";
 import About from "./Components/About/About";
 import Footer from "./Components/Footer/Footer";
 
-// custom hook for global notification
-import {
-  InteractionProvider,
-  useInteraction,
-} from "./Components/Context/InteractionContext";
-import Messages from "./Components/Interaction/Messages";
-
 function App() {
   const [userInput, setUserInput] = useState("");
-  const { updateMessage } = useInteraction();
   const [results, setResults] = useState([]);
   const [favorite, setFavorite] = useState([]);
   const [darkMode, setDarkMode] = useState(false);
@@ -29,10 +19,6 @@ function App() {
   const useDarkMode = () => {
     const newDarkMode = !darkMode;
     setDarkMode(newDarkMode);
-
-    // Message for theme change
-    const message = newDarkMode ? Messages.darkMode : Messages.lightMode;
-    updateMessage(message);
   };
 
   useEffect(() => {
@@ -55,7 +41,7 @@ function App() {
         }`}
       >
         <Header />
-        <InteractionBox />
+
         <main>
           <Routes>
             <Route path="/" element={<Home />} />
