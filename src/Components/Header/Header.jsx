@@ -1,31 +1,45 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
+  const navigate = useNavigate();
+
   return (
     <header className="bg-gray-800 text-white p-4 flex justify-between items-center">
       <h1 className="text-2xl font-bold">RepoSearch</h1>
       <nav>
         <ul className="flex space-x-4">
           <li>
-            <Link to="/" className="hover:underline">
+            <button
+              onClick={() => navigate("/")}
+              className="hover:underline bg-transparent text-white border-none cursor-pointer"
+            >
               Home
-            </Link>
+            </button>
           </li>
           <li>
-            <Link to="/search" className="hover:underline">
+            <button
+              onClick={() => navigate("/search")}
+              className="hover:underline bg-transparent text-white border-none cursor-pointer"
+            >
               Search
-            </Link>
+            </button>
           </li>
           <li>
-            <Link to="/favorite" className="hover:underline">
+            <button
+              onClick={() => navigate("/favorite")}
+              className="hover:underline bg-transparent text-white border-none cursor-pointer"
+            >
               Favorites
-            </Link>
+            </button>
           </li>
           <li>
-            <Link to="/about" className="hover:underline">
+            <button
+              onClick={() => navigate("/about")}
+              className="hover:underline bg-transparent text-white border-none cursor-pointer"
+            >
               About
-            </Link>
+            </button>
           </li>
         </ul>
       </nav>
