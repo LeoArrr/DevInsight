@@ -6,16 +6,12 @@ const Header = () => {
 
   return (
     <header className="bg-gray-800 text-white p-4 flex justify-between items-center">
-      <h1 className="text-2xl font-bold">RepoSearch</h1>
       <nav>
         <ul className="flex space-x-4">
           <li>
-            <button
-              onClick={() => navigate("/")}
-              className="hover:underline bg-transparent text-white border-none cursor-pointer"
-            >
-              Home
-            </button>
+            onClick={() => navigate("/")}
+            className="hover:underline bg-transparent text-white border-none
+            cursor-pointer" ´
           </li>
           <li>
             <button
