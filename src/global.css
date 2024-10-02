@@ -12,6 +12,33 @@ body {
   height: 100vh;
   position: relative;
 }
+
+header {
+  color: #fefefe;
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav ul {
+  display: flex;
+  list-style-type: none;
+  gap: 20px;
+}
+
+nav li {
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  color: #fefefe;
+  transition: all 0.3s ease;
+}
+
+nav li:hover {
+  color: #285bb5;
+}
+
 .main-container {
   display: flex;
   justify-content: center;
@@ -62,9 +89,9 @@ body {
 }
 
 .search-btn:hover {
-  background-color: #285bb5; /* Lighter shade of blue */
-  transform: scale(1.05); /* Slightly enlarge on hover */
-  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.3); /* More pronounced shadow */
+  background-color: #285bb5;
+  transform: scale(1.05);
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.3);
 }
 
 .error-msg {
@@ -151,4 +178,61 @@ body {
 .repo-separator {
   margin-top: 10px;
   border: 0.5px solid #20428a;
+}
+
+.favorites-container {
+  margin-top: 50px;
+}
+
+.favorites-heading {
+  font-size: 35px;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.favorites-list {
+  margin-top: 20px;
+  list-style-type: none;
+  padding: 0;
+}
+
+.favorites-item {
+  padding: 15px;
+  margin-bottom: 20px;
+  background: #1e2a47;
+  border-radius: 20px;
+  box-shadow: 0 16px 30px -10px rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.favorites-link {
+  font-size: 18px;
+  font-weight: bold;
+  color: #fefefe;
+  text-decoration: none;
+}
+
+.favorites-remove-btn {
+  padding: 8px 12px;
+  background-color: #20428a;
+  color: #fefefe;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.favorites-remove-btn:hover {
+  background-color: #285bb5;
+  transform: scale(1.05);
+  box-shadow: 0 16px 30px -10px rgba(0, 0, 0, 0.3);
+}
+
+.no-favorites {
+  margin-top: 20px;
+  font-size: 18px;
+  color: #b1a7a7;
+  text-align: center;
 }
