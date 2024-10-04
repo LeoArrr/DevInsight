@@ -10,7 +10,6 @@ const Header = () => {
         <ul>
           <li onClick={() => navigate("/search")}>Search</li>
           <li onClick={() => navigate("/favorite")}>Favorites</li>
-          <li onClick={() => navigate("/about")}>About</li>
         </ul>
       </nav>
     </header>
