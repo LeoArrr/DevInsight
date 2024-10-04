@@ -1,42 +1,49 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Roboto:wght@400;500&display=swap");
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Space Mono", monospace;
+  font-family: "Roboto", "Inter", sans-serif; /* Default body font */
 }
-body {
-  background-color: #141d2f;
-  color: #fefefe;
+
+bbody {
+  background-color: #e6e5e7;
+  color: #0e0f23;
   font-size: 13px;
   width: 100%;
   height: 100vh;
   position: relative;
 }
 
+/* Header */
 header {
-  color: #fefefe;
-  padding: 16px;
+  color: #757179;
+  padding: 16px 32px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  font-family: "Inter", sans-serif; /* Using Inter for Header */
+  border-bottom: 1px solid #b6b6d5; /* Light border */
 }
 
 nav ul {
   display: flex;
   list-style-type: none;
-  gap: 20px;
+  gap: 30px; /* Slightly larger gaps for a more modern feel */
 }
 
 nav li {
   cursor: pointer;
   font-size: 18px;
-  font-weight: bold;
-  color: #fefefe;
+  font-weight: 600;
+  color: #0e0f23;
   transition: all 0.3s ease;
 }
 
 nav li:hover {
-  color: #285bb5;
+  color: #b6b6d5;
+  text-decoration: underline;
 }
 
 .main-container {
@@ -44,164 +51,201 @@ nav li:hover {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  gap: 50px;
+  gap: 40px;
 }
+
 .main-heading {
   text-align: center;
   font-size: 35px;
-  margin-top: 50px;
+  margin-top: 40px;
+  font-family: "Inter", sans-serif; /* Main heading in Inter */
+  letter-spacing: 1px; /* Adds a modern typographic touch */
 }
+
 .search-form {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 20px;
+  gap: 15px;
 }
+
 .search-input {
-  width: 600px;
-  padding: 15px 20px;
+  width: 550px;
+  padding: 10px 15px;
   outline: none;
-  border: none;
-  font-size: 20px;
-  border-radius: 20px;
-  background-color: #2b3d65;
-  box-shadow: 0 16px 30px -10px rgba(0, 0, 0, 0.2);
-  color: #fefefe;
+  border: 1px solid #b6b6d5;
+  font-size: 18px;
+  border-radius: 8px; /* Less rounded */
+  background-color: #e9e3f1;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  color: #0e0f23;
+  transition: all 0.2s ease;
 }
+
 .search-input::placeholder {
-  color: #fefefe;
+  color: #757179;
 }
+
+.search-input:focus {
+  border-color: #0e0f23;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* A sharper shadow on focus */
+}
+
 .search-btn {
-  width: 100px;
-  padding-top: 15px;
-  padding-bottom: 15px;
+  width: 110px;
+  padding: 10px 0;
   border: none;
   outline: none;
   text-align: center;
-  background-color: #20428a;
-  color: #fefefe;
-  border-radius: 20px;
-  font-size: 20px;
-  font-weight: 700;
+  background-color: #b6b6d5;
+  color: #0e0f23;
+  border-radius: 6px; /* Sharper corners */
+  font-size: 18px;
+  font-weight: 600;
   cursor: pointer;
-  box-shadow: 0 16px 30px -10px rgba(0, 0, 0, 0.2);
   transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Light shadow */
 }
 
 .search-btn:hover {
-  background-color: #285bb5;
+  background-color: #757179;
   transform: scale(1.05);
-  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.3);
 }
 
 .error-msg {
-  font-size: 20px;
+  font-size: 18px;
+  color: #b6b6d5;
+  text-align: center;
 }
+
 .profile-container {
   width: 720px;
-  height: auto;
   margin: 0 auto;
-  padding: 30px;
-  background: #1e2a47;
-  border-radius: 20px;
+  padding: 20px 30px;
+  background: #f2f1f5;
+  border-radius: 10px; /* Less rounded */
   font-size: 15px;
-  box-shadow: 0 16px 30px -10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1); /* Softer shadow */
+  border: 1px solid #b6b6d5; /* Light border for more structure */
 }
+
 .profile-content {
   display: flex;
-  gap: 25px;
-  justify-content: flex-start;
+  gap: 20px;
 }
+
 .profile-avatar {
-  width: 100px;
-  border-radius: 50%;
-  border: 3px solid #20428a;
-  box-shadow: 0 16px 30px -10px rgba(0, 0, 0, 0.2);
+  width: 90px;
+  border-radius: 4px; /* Less rounded for sharper look */
+  border: 2px solid #0e0f23;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 }
+
 .profile-details {
   display: flex;
   flex-direction: column;
 }
+
 .profile-name {
-  font-size: 30px;
+  font-size: 28px;
   font-weight: 600;
+  font-family: "Inter", sans-serif; /* Name in Inter */
+  letter-spacing: 0.5px;
 }
+
 .profile-stats {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
   margin-top: 20px;
-  height: 100px;
-  width: 500px;
-  border-radius: 10px;
-  background: #141d2f;
+  padding: 10px;
+  border-radius: 6px; /* Less rounded */
+  background: #e9e3f1;
   font-size: 13px;
   text-align: center;
-  box-shadow: 0 16px 30px -10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
+
 .stats {
-  color: #1b47a4;
-  font-size: 30px;
-  font-weight: 800;
+  color: #0e0f23;
+  font-size: 28px;
+  font-weight: 700;
 }
+
 .repo-list {
   list-style-type: none;
 }
+
 .repo-item {
   margin: 15px 0;
 }
+
 .repo-name {
   font-size: 18px;
   font-weight: bold;
-  color: #fefefe;
+  color: #0e0f23;
   text-decoration: none;
 }
+
 .repo-description {
-  color: #b1a7a7;
-  margin: 10px 0;
+  color: #757179;
+  margin: 8px 0;
 }
+
 .repo-favorite-btn {
-  padding: 8px 12px;
-  background-color: #20428a;
-  color: #fefefe;
+  padding: 6px 10px;
+  background-color: #b6b6d5;
+  color: #0e0f23;
   border: none;
-  border-radius: 10px;
+  border-radius: 6px; /* Less rounded */
   cursor: pointer;
   transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .repo-favorite-btn:hover {
-  background-color: #285bb5;
+  background-color: #757179;
   transform: scale(1.05);
-  box-shadow: 0 16px 30px -10px rgba(0, 0, 0, 0.3);
 }
+
 .repo-separator {
   margin-top: 10px;
-  border: 0.5px solid #20428a;
+  border: 1px solid #b6b6d5;
 }
 
 .favorites-container {
   margin-top: 50px;
+  max-width: 800px; /* Set a maximum width for the container */
+  margin-left: auto; /* Center the container */
+  margin-right: auto; /* Center the container */
+  padding: 0 20px; /* Add some horizontal padding */
 }
 
 .favorites-heading {
-  font-size: 35px;
+  font-size: 32px;
   text-align: center;
   margin-bottom: 30px;
+  font-family: "Inter", sans-serif;
 }
 
 .favorites-list {
   margin-top: 20px;
   list-style-type: none;
   padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px; /* Space between items */
 }
 
 .favorites-item {
+  position: relative; /* Allows positioning of the button */
+  width: calc(
+    33.33% - 20px
+  ); /* Each item takes a third of the space of the container */
   padding: 15px;
-  margin-bottom: 20px;
-  background: #1e2a47;
-  border-radius: 20px;
-  box-shadow: 0 16px 30px -10px rgba(0, 0, 0, 0.2);
+  background: #e9e3f1;
+  border-radius: 8px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -210,29 +254,75 @@ nav li:hover {
 .favorites-link {
   font-size: 18px;
   font-weight: bold;
-  color: #fefefe;
+  color: #0e0f23;
   text-decoration: none;
+  flex-grow: 1; /* Allow link to take available space */
 }
 
 .favorites-remove-btn {
-  padding: 8px 12px;
-  background-color: #20428a;
-  color: #fefefe;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: all 0.3s ease;
+  position: absolute; /* Position the button absolutely */
+  top: -10px; /* Adjust as needed to position it above the item */
+  right: -10px; /* Position it outside to the right */
+  width: 30px; /* Fixed width for the button */
+  height: 30px; /* Fixed height for the button */
+  background-color: #b6b6d5; /* Button color */
+  color: #0e0f23; /* Text color */
+  border: none; /* No border */
+  border-radius: 50%; /* Circular button */
+  cursor: pointer; /* Pointer cursor */
+  font-size: 20px; /* Larger font size for visibility */
+  line-height: 0; /* Reset line height */
+  transition: background-color 0.3s ease; /* Smooth background color change */
 }
 
 .favorites-remove-btn:hover {
-  background-color: #285bb5;
-  transform: scale(1.05);
-  box-shadow: 0 16px 30px -10px rgba(0, 0, 0, 0.3);
+  background-color: #757179; /* Darker color on hover */
 }
 
 .no-favorites {
-  margin-top: 20px;
-  font-size: 18px;
-  color: #b1a7a7;
   text-align: center;
+  font-size: 18px;
+}
+
+@media (max-width: 900px) {
+  .favorites-item {
+    width: calc(
+      50% - 10px
+    ); /* Each item takes half the space on medium screens */
+  }
+}
+
+@media (max-width: 590px) {
+  .main-heading {
+    font-size: 20px;
+  }
+  .search-input {
+    width: 250px;
+  }
+  .search-btn {
+    width: 80px;
+    font-size: 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  .profile-container {
+    width: 400px;
+  }
+  .profile-avatar {
+    width: 50px;
+  }
+  .profile-name {
+    font-size: 12px;
+  }
+  .profile-bio {
+    font-size: 10px;
+    margin: 40px 60px 20px 5px;
+  }
+  .profile-stats {
+    width: 250px;
+    font-size: 10px;
+  }
+  .stats {
+    font-size: 18px;
+  }
 }

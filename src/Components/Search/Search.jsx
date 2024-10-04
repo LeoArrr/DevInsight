@@ -5,6 +5,7 @@ import { useFavorites } from "../Favorites/FavoriteContext";
 
 const Search = () => {
   const [username, setUsername] = useState("");
+  const [language, setLanguage] = useState(""); // State for language search
   const [profile, setProfile] = useState(null);
   const [repositories, setRepositories] = useState([]);
   const [error, setError] = useState(null);
@@ -12,27 +13,50 @@ const Search = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      // Fetch profile data
-      const userResponse = await fetch(
-        `https://api.github.com/users/${username}`
-      );
-      if (!userResponse.ok) {
-        throw new Error("User Not Found");
-      }
-      const userData = await userResponse.json();
-      setProfile(userData);
-      setError(null);
+    setError(null); // Reset error at the start of the search
 
-      // Fetch repository
-      const repoResponse = await fetch(
-        `https://api.github.com/search/repositories?q=user:${username}`
-      );
-      if (!repoResponse.ok) {
-        throw new Error("Repositories Not Found");
+    try {
+      // If username is provided, fetch the user profile and their repositories
+      if (username) {
+        const userResponse = await fetch(
+          `https://api.github.com/users/${username}`
+        );
+
+        if (!userResponse.ok) {
+          throw new Error("User Not Found");
+        }
+
+        const userData = await userResponse.json();
+        setProfile(userData);
+
+        // Fetch repositories for the user
+        const repoResponse = await fetch(
+          `https://api.github.com/users/${username}/repos`
+        );
+
+        if (!repoResponse.ok) {
+          throw new Error("Repositories Not Found");
+        }
+
+        const repoData = await repoResponse.json();
+        setRepositories(repoData);
       }
-      const repoData = await repoResponse.json();
-      setRepositories(repoData.items);
+      // If language is provided, fetch repositories by language
+      else if (language) {
+        const langRepoResponse = await fetch(
+          `https://api.github.com/search/repositories?q=language:${language}&sort=stars&order=desc`
+        );
+
+        if (!langRepoResponse.ok) {
+          throw new Error("Repositories Not Found");
+        }
+
+        const langRepoData = await langRepoResponse.json();
+        setRepositories(langRepoData.items);
+        setProfile(null); // Reset profile for language searches
+      } else {
+        setError("Please enter a GitHub username or a programming language.");
+      }
     } catch (error) {
       setProfile(null);
       setRepositories([]);
@@ -58,7 +82,20 @@ const Search = () => {
           placeholder="Enter GitHub Username..."
           value={username}
           className="search-input"
-          onChange={(e) => setUsername(e.target.value)}
+          onChange={(e) => {
+            setUsername(e.target.value);
+            setLanguage(""); // Clear language when username is being typed
+          }}
+        />
+        <input
+          type="text"
+          placeholder="Or enter a coding language..."
+          value={language}
+          className="search-input"
+          onChange={(e) => {
+            setLanguage(e.target.value);
+            setUsername(""); // Clear username when language is being typed
+          }}
         />
         <button type="submit" className="search-btn">
           Search
@@ -137,7 +174,9 @@ const Search = () => {
                     >
                       {repo.name}
                     </a>
-                    <p className="repo-description">{repo.description}</p>
+                    <p className="repo-description">
+                      {repo.description || "No description available"}
+                    </p>
                     <button
                       onClick={() => handleFavorites(repo)}
                       className="repo-favorite-btn"

@@ -11,19 +11,25 @@ const Favorites = () => {
         <ul className="favorites-list">
           {favorites.map((fav) => (
             <li key={fav.id} className="favorites-item">
-              <a
-                href={fav.html_url}
-                target="_blank"
-                rel="noreferrer"
-                className="favorites-link"
-              >
-                {fav.name}
-              </a>
+              <div className="repo-info">
+                <h4 className="repo-name">
+                  <a href={fav.html_url} target="_blank" rel="noreferrer">
+                    {fav.name}
+                  </a>
+                </h4>
+                <p className="repo-description">
+                  {fav.description || "No description available."}
+                </p>
+                <p className="repo-stats">
+                  ⭐ {fav.stars} | 🍴 {fav.forks} | 🗓️{" "}
+                  {new Date(fav.updated_at).toLocaleDateString()}
+                </p>
+              </div>
               <button
                 onClick={() => removeFavorite(fav)}
                 className="favorites-remove-btn"
               >
-                Remove from Favorites
+                &times; {/* X Icon */}
               </button>
             </li>
           ))}
