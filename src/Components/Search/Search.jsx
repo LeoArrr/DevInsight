@@ -1,66 +1,90 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { PiBuildingsFill } from "react-icons/pi";
 import { useFavorites } from "../Favorites/FavoriteContext";
 
 const Search = () => {
   const [username, setUsername] = useState("");
-  const [language, setLanguage] = useState(""); // State for language search
   const [profile, setProfile] = useState(null);
   const [repositories, setRepositories] = useState([]);
+  const [displayedRepositories, setDisplayedRepositories] = useState([]);
+  const [page, setPage] = useState(1);
+  const [perPage, setPerPage] = useState(10);
+  const [loadingMore, setLoadingMore] = useState(false);
   const [error, setError] = useState(null);
   const { favorites, addFavorite, removeFavorite } = useFavorites();
 
+  const fetchRepositories = async (username, page, perPage) => {
+    const repoResponse = await fetch(
+      `https://api.github.com/search/repositories?q=user:${username}&page=${page}&per_page=${perPage}`
+    );
+    if (!repoResponse.ok) {
+      throw new Error("Repositories Not Found");
+    }
+    const repoData = await repoResponse.json();
+    return repoData.items;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError(null); // Reset error at the start of the search
+    setPage(1);
 
     try {
-      // If username is provided, fetch the user profile and their repositories
-      if (username) {
-        const userResponse = await fetch(
-          `https://api.github.com/users/${username}`
-        );
-
-        if (!userResponse.ok) {
-          throw new Error("User Not Found");
-        }
-
-        const userData = await userResponse.json();
-        setProfile(userData);
-
-        // Fetch repositories for the user
-        const repoResponse = await fetch(
-          `https://api.github.com/users/${username}/repos`
-        );
-
-        if (!repoResponse.ok) {
-          throw new Error("Repositories Not Found");
-        }
-
-        const repoData = await repoResponse.json();
-        setRepositories(repoData);
+      const userResponse = await fetch(
+        `https://api.github.com/users/${username}`
+      );
+      if (!userResponse.ok) {
+        throw new Error("User Not Found");
       }
-      // If language is provided, fetch repositories by language
-      else if (language) {
-        const langRepoResponse = await fetch(
-          `https://api.github.com/search/repositories?q=language:${language}&sort=stars&order=desc`
-        );
+      const userData = await userResponse.json();
+      setProfile(userData); // Profile data set here
+      setError(null);
 
-        if (!langRepoResponse.ok) {
-          throw new Error("Repositories Not Found");
-        }
-
-        const langRepoData = await langRepoResponse.json();
-        setRepositories(langRepoData.items);
-        setProfile(null); // Reset profile for language searches
-      } else {
-        setError("Please enter a GitHub username or a programming language.");
-      }
+      const repos = await fetchRepositories(username, 1, perPage);
+      setRepositories(repos);
+      setDisplayedRepositories(repos.slice(0, perPage));
+      localStorage.setItem(
+        "searchData",
+        JSON.stringify({ username, profile: userData, repositories: repos })
+      );
     } catch (error) {
       setProfile(null);
       setRepositories([]);
       setError(error.message);
+    }
+  };
+
+  useEffect(() => {
+    const savedSearchData = localStorage.getItem("searchData");
+    if (savedSearchData) {
+      const { username, profile, repositories } = JSON.parse(savedSearchData);
+      setDisplayedRepositories(repositories.slice(0, perPage));
+      setUsername(username);
+      setProfile(profile);
+      setRepositories(repositories);
+    }
+  }, []);
+
+  const loadMoreRepositories = async () => {
+    try {
+      setLoadingMore(true);
+      const nextPage = page + 1;
+
+      // Fetch more repositories
+      const moreRepos = await fetchRepositories(username, nextPage, perPage);
+
+      // Append more repositories to the existing list
+      setRepositories((prevRepos) => [...prevRepos, ...moreRepos]);
+
+      // Append more to displayed repositories
+      setDisplayedRepositories((prevRepos) => [...prevRepos, ...moreRepos]);
+
+      // Update the page number for the next fetch
+      setPage(nextPage);
+    } catch (error) {
+      setError("Unable to load more repositories.");
+    } finally {
+      setLoadingMore(false);
     }
   };
 
@@ -76,26 +100,24 @@ const Search = () => {
   return (
     <div className="main-container">
       <h1 className="main-heading">DevInsight</h1>
+
       <form className="search-form" onSubmit={handleSubmit}>
+        <select
+          value={perPage}
+          onChange={(e) => setPerPage(Number(e.target.value))}
+          className="per-page-select"
+        >
+          <option value={5}>5</option>
+          <option value={10}>10</option>
+          <option value={15}>15</option>
+          <option value={20}>20</option>
+        </select>
         <input
           type="text"
           placeholder="Enter GitHub Username..."
           value={username}
           className="search-input"
-          onChange={(e) => {
-            setUsername(e.target.value);
-            setLanguage(""); // Clear language when username is being typed
-          }}
-        />
-        <input
-          type="text"
-          placeholder="Or enter a coding language..."
-          value={language}
-          className="search-input"
-          onChange={(e) => {
-            setLanguage(e.target.value);
-            setUsername(""); // Clear username when language is being typed
-          }}
+          onChange={(e) => setUsername(e.target.value)}
         />
         <button type="submit" className="search-btn">
           Search
@@ -115,7 +137,9 @@ const Search = () => {
               />
             </div>
             <div className="profile-details">
-              <h2 className="profile-name">{profile.name}</h2>
+              <h2 className="profile-name">
+                {profile.name || "No name provided"}
+              </h2>
               <p className="profile-created">
                 Joined: {new Date(profile.created_at).toLocaleDateString()}
               </p>
@@ -127,7 +151,7 @@ const Search = () => {
               >
                 @{profile.login}
               </a>
-              <p className="profile-bio">{profile.bio}</p>
+              <p className="profile-bio">{profile.bio || "No bio available"}</p>
 
               <div className="profile-stats">
                 <div>
@@ -145,26 +169,20 @@ const Search = () => {
               </div>
 
               <div className="profile-info">
-                {profile.location && (
+                {profile.location && profile.location.trim() !== "" && (
                   <p className="profile-location">
                     <FaMapMarkerAlt /> {profile.location}
-                  </p>
-                )}
-                {profile.company && (
-                  <p className="profile-company">
-                    <PiBuildingsFill /> {profile.company}
                   </p>
                 )}
               </div>
             </div>
           </div>
 
-          {/* Repositories Section */}
           {repositories.length > 0 && (
             <div>
               <h3>Repositories:</h3>
               <ul className="repo-list">
-                {repositories.map((repo) => (
+                {displayedRepositories.map((repo) => (
                   <li key={repo.id} className="repo-item">
                     <a
                       href={repo.html_url}
@@ -189,6 +207,14 @@ const Search = () => {
                   </li>
                 ))}
               </ul>
+
+              <button
+                onClick={loadMoreRepositories}
+                disabled={loadingMore}
+                className="load-more-btn"
+              >
+                {loadingMore ? <span>Loading...</span> : "Show More"}
+              </button>
             </div>
           )}
         </div>
