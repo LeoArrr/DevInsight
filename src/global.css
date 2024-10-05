@@ -1,15 +1,16 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Roboto:wght@400;500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&display=swap");
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Roboto", "Inter", sans-serif;
+  font-family: "Inconsolata", monospace;
 }
 
 body {
-  background-color: #e6e5e7;
-  color: #0e0f23;
+  background-color: #212429; /* Grey tone for the background */
+  color: #f6f5f7d5; /* Light text color for readability */
   font-size: 13px;
   width: 100%;
   height: 100vh;
@@ -17,13 +18,13 @@ body {
 }
 
 header {
-  color: #757179;
+  color: #b6b6d5; /* Greyish text color */
   padding: 16px 32px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   font-family: "Inter", sans-serif;
-  border-bottom: 1px solid #b6b6d5;
+  border-bottom: 1px solid #f6f5f740; /* Subtle border */
 }
 
 nav ul {
@@ -36,12 +37,12 @@ nav li {
   cursor: pointer;
   font-size: 18px;
   font-weight: 600;
-  color: #0e0f23;
+  color: #f6f5f7d5; /* Light grey text */
   transition: all 0.3s ease;
 }
 
 nav li:hover {
-  color: #b6b6d5;
+  color: #57c4db; /* Light blue hover effect */
   text-decoration: underline;
 }
 
@@ -51,6 +52,7 @@ nav li:hover {
   align-items: center;
   flex-direction: column;
   gap: 40px;
+  color: #f6f5f7d5; /* Light text color */
 }
 
 .main-heading {
@@ -59,6 +61,7 @@ nav li:hover {
   margin-top: 40px;
   font-family: "Inter", sans-serif;
   letter-spacing: 1px;
+  color: #57c4db; /* Light blue for the main heading */
 }
 
 .search-form {
@@ -72,12 +75,12 @@ nav li:hover {
   width: 550px;
   padding: 10px 15px;
   outline: none;
-  border: 1px solid #b6b6d5;
+  border: 1px solid #f6f5f740; /* Subtle border */
   font-size: 18px;
   border-radius: 8px;
-  background-color: #e9e3f1;
+  background-color: #2e3136; /* Dark grey background */
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  color: #0e0f23;
+  color: #f6f5f7d5; /* Light text */
   transition: all 0.2s ease;
 }
 
@@ -86,7 +89,7 @@ nav li:hover {
 }
 
 .search-input:focus {
-  border-color: #0e0f23;
+  border-color: #57c4db; /* Light blue on focus */
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
@@ -96,8 +99,8 @@ nav li:hover {
   border: none;
   outline: none;
   text-align: center;
-  background-color: #b6b6d5;
-  color: #0e0f23;
+  background-color: #57c4db; /* Light blue background */
+  color: #f6f5f7d5; /* Light text */
   border-radius: 6px;
   font-size: 18px;
   font-weight: 600;
@@ -107,13 +110,13 @@ nav li:hover {
 }
 
 .search-btn:hover {
-  background-color: #757179;
+  background-color: #b6b6d5; /* Grey hover effect */
   transform: scale(1.05);
 }
 
 .error-msg {
   font-size: 18px;
-  color: #b6b6d5;
+  color: #f6f5f7d5;
   text-align: center;
 }
 
@@ -121,12 +124,13 @@ nav li:hover {
   width: 720px;
   margin: 0 auto;
   padding: 20px 30px;
-  background: #f2f1f5;
+  background: #2e3136; /* Dark grey background */
   border-radius: 10px;
   font-size: 15px;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
-  border: 1px solid #b6b6d5;
+  border: 1px solid #f6f5f740;
   position: relative;
+  color: #f6f5f7d5;
 }
 
 .profile-content {
@@ -136,8 +140,8 @@ nav li:hover {
 
 .profile-avatar {
   width: 90px;
-  border-radius: 4px;
-  border: 2px solid #0e0f23;
+  border-radius: 50px;
+  border: 1px solid #57c4db; /* Light blue border */
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
@@ -151,6 +155,7 @@ nav li:hover {
   font-weight: 600;
   font-family: "Inter", sans-serif;
   letter-spacing: 0.5px;
+  color: #57c4db; /* Light blue */
 }
 
 .profile-stats {
@@ -161,14 +166,15 @@ nav li:hover {
   height: 100px;
   width: 500px;
   border-radius: 10px;
-  background: #b6b6d5;
+  background: #212429; /* Dark grey */
   font-size: 13px;
   text-align: center;
   box-shadow: 0 16px 30px -10px rgba(0, 0, 0, 0.2);
+  color: #f6f5f7d5;
 }
 
 .stats {
-  color: #0e0f23;
+  color: #f6f5f7d5; /* Light text */
   font-size: 28px;
   font-weight: 700;
 }
@@ -184,32 +190,32 @@ nav li:hover {
 .repo-item {
   margin: 15px 0;
   padding: 10px;
-  background: #fff;
-  border: 1px solid #b6b6d5;
+  background: #2e3136; /* Dark grey background for repo items */
+  border: 1px solid #f6f5f740; /* Subtle border */
   border-radius: 8px;
   transition: all 0.3s ease;
 }
 
 .repo-item:hover {
-  background: #f5f5f5;
+  background: #3a3e44; /* Slightly lighter grey on hover */
 }
 
 .repo-name {
   font-size: 18px;
   font-weight: bold;
-  color: #0e0f23;
+  color: #57c4db; /* Light blue */
   text-decoration: none;
 }
 
 .repo-description {
-  color: #757179;
+  color: #b6b6d5; /* Lighter grey for description */
   margin: 8px 0;
 }
 
 .repo-favorite-btn {
   padding: 6px 10px;
-  background-color: #b6b6d5;
-  color: #0e0f23;
+  background-color: #57c4db; /* Light blue button */
+  color: #f6f5f7d5; /* Light text */
   border: none;
   border-radius: 6px;
   cursor: pointer;
@@ -218,92 +224,211 @@ nav li:hover {
 }
 
 .repo-favorite-btn:hover {
-  background-color: #757179;
+  background-color: #b6b6d5; /* Grey hover effect */
   transform: scale(1.05);
 }
 
 .repo-separator {
   margin-top: 10px;
-  border: 1px solid #b6b6d5;
+  border: 1px solid #f6f5f740; /* Subtle separator */
 }
 
 .favorites-container {
   margin-top: 50px;
-  max-width: 800px;
+  max-width: 100%;
   margin-left: auto;
   margin-right: auto;
   padding: 0 20px;
+  color: #f6f5f7d5;
 }
 
-.favorites-heading {
-  font-size: 32px;
-  text-align: center;
-  margin-bottom: 30px;
+/* Grid layout for the favorites list */
+.favorites-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Three columns */
+  justify-content: center;
+  gap: 4rem; /* Space between grid items */
+  row-gap: 1rem;
+  padding: 0;
+  list-style: none;
+}
+
+/* Styling individual favorite items */
+.favorites-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 1px solid #f6f5f740; /* Subtle border */
+  padding: 1.5rem;
+  background-color: #212429;
+  border-radius: 10px;
+  transition: all 0.5s ease-in-out;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.favorites-item:hover {
+  transform: scale(105%); /* Slight zoom effect on hover */
+}
+
+/* Styling for the repo info inside the list item */
+.repo-info {
+  margin-bottom: 10px;
+}
+
+.repo-name a {
+  font-size: 18px;
+  font-weight: bold;
+  color: #57c4db; /* Light blue for repo name */
+  text-decoration: none;
+}
+
+.repo-description {
+  color: #b6b6d5; /* Lighter grey for description */
+  margin: 8px 0;
+}
+
+.repo-stats {
+  color: #f6f5f7d5; /* Light grey text */
+  font-size: 14px;
+}
+
+/* Remove favorite button */
+.favorites-container {
+  margin-top: 50px;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 20px;
+  color: #f6f5f7d5;
+  display: flex;
+  justify-content: center;
 }
 
 .favorites-list {
-  margin-top: 20px;
-  list-style-type: none;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Three columns for wider screens */
+  justify-content: center;
+  justify-items: center; /* Center items horizontally */
+  gap: 2rem; /* Space between grid items */
+  row-gap: 1.5rem; /* Row gap */
   padding: 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
+  list-style: none;
+  max-width: 1200px; /* Max width for centering the list */
+  margin: 0 auto;
 }
 
 .favorites-item {
-  position: relative;
-  width: calc(33.33% - 20px);
-  padding: 15px;
-  background: #e9e3f1;
-  border-radius: 8px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  align-items: center;
+  width: 100%; /* Allow full width to be flexible */
+  max-width: 300px; /* Maximum width to maintain a consistent size */
+  min-width: 300px; /* Minimum width to ensure cards don't shrink below this */
+  border: 1px solid #f6f5f740; /* Subtle border */
+  padding: 1.5rem;
+  background-color: #212429;
+  border-radius: 10px;
+  transition: all 0.5s ease-in-out;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-.favorites-link {
+.favorites-item:hover {
+  transform: scale(105%); /* Slight zoom effect on hover */
+}
+
+/* Styling for the repo info inside the list item */
+.repo-info {
+  margin-bottom: 10px;
+}
+
+.repo-name a {
   font-size: 18px;
   font-weight: bold;
-  color: #0e0f23;
+  color: #57c4db; /* Light blue for repo name */
   text-decoration: none;
-  flex-grow: 1;
 }
 
+.repo-description {
+  color: #b6b6d5; /* Lighter grey for description */
+  margin: 8px 0;
+}
+
+.repo-stats {
+  color: #f6f5f7d5; /* Light grey text */
+  font-size: 14px;
+}
+
+/* Remove favorite button */
 .favorites-remove-btn {
-  position: absolute;
-  top: -10px;
-  right: -10px;
-  width: 30px;
-  height: 30px;
-  background-color: #b6b6d5;
-  color: #0e0f23;
-  border: none;
-  border-radius: 50%;
+  max-width: 40px;
+  padding: 0.5rem;
+  background-color: #212429;
+  color: #f6f5f7d5; /* Light text */
+  border: 1px solid #f6f5f740;
+  box-shadow: 0px 2px 4px #f6f5f740;
+  border-radius: 4px;
   cursor: pointer;
-  font-size: 20px;
-  line-height: 0;
-  transition: background-color 0.3s ease;
+  transition: all 0.2s ease-in-out;
 }
 
 .favorites-remove-btn:hover {
-  background-color: #757179;
+  color: #57c4db; /* Light blue on hover */
+  border-color: #57c4db;
 }
 
+.favorites-remove-btn:active {
+  transform: scale(95%);
+}
+
+/* No favorites message */
 .no-favorites {
   text-align: center;
   font-size: 18px;
+  color: #f6f5f7d5;
+  margin-top: 20px;
 }
 
-@media (max-width: 900px) {
+/* Responsive Adjustments */
+@media (max-width: 1200px) {
+  .favorites-list {
+    grid-template-columns: repeat(2, 1fr); /* Two columns for medium screens */
+  }
+}
+@media (max-width: 900px) and (min-width: 783px) {
+  .favorites-list {
+    grid-template-columns: repeat(2, 1fr); /* Two columns for this range */
+    gap: 1.5rem; /* Adjust gap if needed */
+  }
   .favorites-item {
-    width: calc(50% - 10px);
+    width: calc(
+      50% - 10px
+    ); /* Adjust for two column layout, with gap consideration */
+    min-width: 300px; /* Ensure it still has a minimum width */
+    max-width: none; /* Remove max-width so it can expand */
+  }
+}
+
+@media (max-width: 768px) {
+  .favorites-list {
+    grid-template-columns: 1fr; /* Single column for mobile */
+    max-width: 100%; /* Ensure full width on smaller screens */
+  }
+  .favorites-item {
+    width: 100%; /* Allow the card to use full width on smaller screens */
+    max-width: none; /* Remove max-width to adapt to smaller screens */
+    min-width: 300px; /* Keep minimum width */
   }
 }
 
 @media (max-width: 590px) {
   .main-heading {
     font-size: 20px;
+  }
+  .favorites-list {
+    grid-template-columns: 1fr; /* Single column layout for mobile */
+  }
+  .favorites-item {
+    padding: 1rem; /* Reduce padding for smaller screens */
   }
   .search-input {
     width: 250px;

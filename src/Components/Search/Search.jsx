@@ -37,7 +37,7 @@ const Search = () => {
         throw new Error("User Not Found");
       }
       const userData = await userResponse.json();
-      setProfile(userData); // Profile data set here
+      setProfile(userData);
       setError(null);
 
       const repos = await fetchRepositories(username, 1, perPage);
@@ -53,7 +53,7 @@ const Search = () => {
       setError(error.message);
     }
   };
-
+  //runs after compnents tocks up
   useEffect(() => {
     const savedSearchData = localStorage.getItem("searchData");
     if (savedSearchData) {
@@ -70,16 +70,12 @@ const Search = () => {
       setLoadingMore(true);
       const nextPage = page + 1;
 
-      // Fetch more repositories
       const moreRepos = await fetchRepositories(username, nextPage, perPage);
 
-      // Append more repositories to the existing list
       setRepositories((prevRepos) => [...prevRepos, ...moreRepos]);
 
-      // Append more to displayed repositories
       setDisplayedRepositories((prevRepos) => [...prevRepos, ...moreRepos]);
 
-      // Update the page number for the next fetch
       setPage(nextPage);
     } catch (error) {
       setError("Unable to load more repositories.");

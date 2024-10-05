@@ -6,7 +6,6 @@ const Favorites = () => {
 
   return (
     <div className="favorites-container">
-      <h3 className="favorites-heading">Favorites:</h3>
       {favorites.length > 0 ? (
         <ul className="favorites-list">
           {favorites.map((fav) => (
