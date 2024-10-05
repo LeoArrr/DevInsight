@@ -30,51 +30,57 @@ const Search = () => {
     setPage(1);
 
     try {
-      // If username is provided, fetch the user profile and their repositories
-      if (username) {
-        const userResponse = await fetch(
-          `https://api.github.com/users/${username}`
-        );
-
-        if (!userResponse.ok) {
-          throw new Error("User Not Found");
-        }
-
-        const userData = await userResponse.json();
-        setProfile(userData);
-
-        // Fetch repositories for the user
-        const repoResponse = await fetch(
-          `https://api.github.com/users/${username}/repos`
-        );
-
-        if (!repoResponse.ok) {
-          throw new Error("Repositories Not Found");
-        }
-
-        const repoData = await repoResponse.json();
-        setRepositories(repoData);
+      const userResponse = await fetch(
+        `https://api.github.com/users/${username}`
+      );
+      if (!userResponse.ok) {
+        throw new Error("User Not Found");
       }
-      // If language is provided, fetch repositories by language
-      else if (language) {
-        const langRepoResponse = await fetch(
-          `https://api.github.com/search/repositories?q=language:${language}&sort=stars&order=desc`
-        );
+      const userData = await userResponse.json();
+      setProfile(userData);
+      setError(null);
 
-        if (!langRepoResponse.ok) {
-          throw new Error("Repositories Not Found");
-        }
-
-        const langRepoData = await langRepoResponse.json();
-        setRepositories(langRepoData.items);
-        setProfile(null); // Reset profile for language searches
-      } else {
-        setError("Please enter a GitHub username or a programming language.");
-      }
+      const repos = await fetchRepositories(username, 1, perPage);
+      setRepositories(repos);
+      setDisplayedRepositories(repos.slice(0, perPage));
+      localStorage.setItem(
+        "searchData",
+        JSON.stringify({ username, profile: userData, repositories: repos })
+      );
     } catch (error) {
       setProfile(null);
       setRepositories([]);
       setError(error.message);
+    }
+  };
+  //runs after compnents tocks up
+  useEffect(() => {
+    const savedSearchData = localStorage.getItem("searchData");
+    if (savedSearchData) {
+      const { username, profile, repositories } = JSON.parse(savedSearchData);
+      setDisplayedRepositories(repositories.slice(0, perPage));
+      setUsername(username);
+      setProfile(profile);
+      setRepositories(repositories);
+    }
+  }, []);
+
+  const loadMoreRepositories = async () => {
+    try {
+      setLoadingMore(true);
+      const nextPage = page + 1;
+
+      const moreRepos = await fetchRepositories(username, nextPage, perPage);
+
+      setRepositories((prevRepos) => [...prevRepos, ...moreRepos]);
+
+      setDisplayedRepositories((prevRepos) => [...prevRepos, ...moreRepos]);
+
+      setPage(nextPage);
+    } catch (error) {
+      setError("Unable to load more repositories.");
+    } finally {
+      setLoadingMore(false);
     }
   };
 
@@ -214,3 +220,4 @@ const Search = () => {
 };
 
 export default Search;
+
