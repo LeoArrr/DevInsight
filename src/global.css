@@ -5,12 +5,12 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Inconsolata", monospace;
+  font-family: "Roboto", "Inter", sans-serif; /* Default body font */
 }
 
-body {
-  background-color: #212429; /* Grey tone for the background */
-  color: #f6f5f7d5; /* Light text color for readability */
+bbody {
+  background-color: #e6e5e7;
+  color: #0e0f23;
   font-size: 13px;
   width: 100%;
   height: 100vh;
@@ -23,8 +23,8 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-family: "Inter", sans-serif;
-  border-bottom: 1px solid #f6f5f740; /* Subtle border */
+  font-family: "Inter", sans-serif; /* Using Inter for Header */
+  border-bottom: 1px solid #b6b6d5; /* Light border */
 }
 
 nav ul {
@@ -59,9 +59,8 @@ nav li:hover {
   text-align: center;
   font-size: 35px;
   margin-top: 40px;
-  font-family: "Inter", sans-serif;
-  letter-spacing: 1px;
-  color: #57c4db; /* Light blue for the main heading */
+  font-family: "Inter", sans-serif; /* Main heading in Inter */
+  letter-spacing: 1px; /* Adds a modern typographic touch */
 }
 
 .search-form {
@@ -77,10 +76,10 @@ nav li:hover {
   outline: none;
   border: 1px solid #f6f5f740; /* Subtle border */
   font-size: 18px;
-  border-radius: 8px;
-  background-color: #2e3136; /* Dark grey background */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  color: #f6f5f7d5; /* Light text */
+  border-radius: 8px; /* Less rounded */
+  background-color: #e9e3f1;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  color: #0e0f23;
   transition: all 0.2s ease;
 }
 
@@ -89,8 +88,8 @@ nav li:hover {
 }
 
 .search-input:focus {
-  border-color: #57c4db; /* Light blue on focus */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-color: #0e0f23;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* A sharper shadow on focus */
 }
 
 .search-btn {
@@ -99,9 +98,9 @@ nav li:hover {
   border: none;
   outline: none;
   text-align: center;
-  background-color: #57c4db; /* Light blue background */
-  color: #f6f5f7d5; /* Light text */
-  border-radius: 6px;
+  background-color: #b6b6d5;
+  color: #0e0f23;
+  border-radius: 6px; /* Sharper corners */
   font-size: 18px;
   font-weight: 600;
   cursor: pointer;
@@ -124,13 +123,11 @@ nav li:hover {
   width: 720px;
   margin: 0 auto;
   padding: 20px 30px;
-  background: #2e3136; /* Dark grey background */
-  border-radius: 10px;
+  background: #f2f1f5;
+  border-radius: 10px; /* Less rounded */
   font-size: 15px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
-  border: 1px solid #f6f5f740;
-  position: relative;
-  color: #f6f5f7d5;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1); /* Softer shadow */
+  border: 1px solid #b6b6d5; /* Light border for more structure */
 }
 
 .profile-content {
@@ -140,9 +137,9 @@ nav li:hover {
 
 .profile-avatar {
   width: 90px;
-  border-radius: 50px;
-  border: 1px solid #57c4db; /* Light blue border */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 4px; /* Less rounded for sharper look */
+  border: 2px solid #0e0f23;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 }
 
 .profile-details {
@@ -163,14 +160,12 @@ nav li:hover {
   justify-content: space-evenly;
   align-items: center;
   margin-top: 20px;
-  height: 100px;
-  width: 500px;
-  border-radius: 10px;
-  background: #212429; /* Dark grey */
+  padding: 10px;
+  border-radius: 6px; /* Less rounded */
+  background: #e9e3f1;
   font-size: 13px;
   text-align: center;
-  box-shadow: 0 16px 30px -10px rgba(0, 0, 0, 0.2);
-  color: #f6f5f7d5;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .stats {
@@ -189,15 +184,6 @@ nav li:hover {
 
 .repo-item {
   margin: 15px 0;
-  padding: 10px;
-  background: #2e3136; /* Dark grey background for repo items */
-  border: 1px solid #f6f5f740; /* Subtle border */
-  border-radius: 8px;
-  transition: all 0.3s ease;
-}
-
-.repo-item:hover {
-  background: #3a3e44; /* Slightly lighter grey on hover */
 }
 
 .repo-name {
@@ -258,13 +244,17 @@ nav li:hover {
 /* Remove favorite button */
 .favorites-container {
   margin-top: 50px;
-  max-width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 0 20px;
-  color: #f6f5f7d5;
-  display: flex;
-  justify-content: center;
+  max-width: 800px; /* Set a maximum width for the container */
+  margin-left: auto; /* Center the container */
+  margin-right: auto; /* Center the container */
+  padding: 0 20px; /* Add some horizontal padding */
+}
+
+.favorites-heading {
+  font-size: 32px;
+  text-align: center;
+  margin-bottom: 30px;
+  font-family: "Inter", sans-serif;
 }
 
 .favorites-list {
@@ -275,48 +265,52 @@ nav li:hover {
   gap: 2rem; /* Space between grid items */
   row-gap: 1.5rem; /* Row gap */
   padding: 0;
-  list-style: none;
-  max-width: 1200px; /* Max width for centering the list */
-  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px; /* Space between items */
 }
 
 .favorites-item {
+  position: relative; /* Allows positioning of the button */
+  width: calc(
+    33.33% - 20px
+  ); /* Each item takes a third of the space of the container */
+  padding: 15px;
+  background: #e9e3f1;
+  border-radius: 8px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 100%;
-  max-width: 300px;
-  min-width: 300px;
-  border: 1px solid #f6f5f740; /* Subtle border */
-  padding: 1.5rem;
-  background-color: #212429;
-  border-radius: 10px;
-  transition: all 0.5s ease-in-out;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
-  position: relative; /* Create a positioning context for absolute positioning */
+  align-items: center;
 }
 
-.favorites-item:hover {
-  transform: scale(105%); /* Slight zoom effect on hover */
+.favorites-link {
+  font-size: 18px;
+  font-weight: bold;
+  color: #0e0f23;
+  text-decoration: none;
+  flex-grow: 1; /* Allow link to take available space */
 }
 
 .favorites-remove-btn {
-  position: absolute;
-  top: -10px; /* Adjust this value based on design needs */
-  right: -10px; /* Adjust this value based on design needs */
-  max-width: 40px;
-  padding: 0.5rem;
-  background-color: #212429; /* Match card background */
-  color: #f6f5f7d5; /* Light text */
-  border: 1px solid #f6f5f740;
-  box-shadow: 0px 2px 4px #f6f5f740;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: all 0.2s ease-in-out;
+  position: absolute; /* Position the button absolutely */
+  top: -10px; /* Adjust as needed to position it above the item */
+  right: -10px; /* Position it outside to the right */
+  width: 30px; /* Fixed width for the button */
+  height: 30px; /* Fixed height for the button */
+  background-color: #b6b6d5; /* Button color */
+  color: #0e0f23; /* Text color */
+  border: none; /* No border */
+  border-radius: 50%; /* Circular button */
+  cursor: pointer; /* Pointer cursor */
+  font-size: 20px; /* Larger font size for visibility */
+  line-height: 0; /* Reset line height */
+  transition: background-color 0.3s ease; /* Smooth background color change */
 }
+
 .favorites-remove-btn:hover {
-  color: red; /* Change text color to red on hover */
-  border-color: red; /* Change border color to red on hover */
+  background-color: #757179; /* Darker color on hover */
 }
 
 .favorites-remove-btn:active {
@@ -355,10 +349,9 @@ nav li:hover {
     justify-content: center; /* Center items when single column */
   }
   .favorites-item {
-    width: 300px; /* Set fixed width */
-    margin: 0 auto; /* Center the item */
-    min-width: 300px; /* Keep minimum width */
-    max-width: 300px; /* Prevent exceeding 300px */
+    width: calc(
+      50% - 10px
+    ); /* Each item takes half the space on medium screens */
   }
 }
 
