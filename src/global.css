@@ -233,43 +233,6 @@ nav li:hover {
   border: 1px solid #f6f5f740; /* Subtle separator */
 }
 
-.favorites-container {
-  margin-top: 50px;
-  max-width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 0 20px;
-  color: #f6f5f7d5;
-}
-
-/* Grid layout for the favorites list */
-.favorites-list {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr); /* Three columns */
-  justify-content: center;
-  gap: 4rem; /* Space between grid items */
-  row-gap: 1rem;
-  padding: 0;
-  list-style: none;
-}
-
-/* Styling individual favorite items */
-.favorites-item {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  border: 1px solid #f6f5f740; /* Subtle border */
-  padding: 1.5rem;
-  background-color: #212429;
-  border-radius: 10px;
-  transition: all 0.5s ease-in-out;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-.favorites-item:hover {
-  transform: scale(105%); /* Slight zoom effect on hover */
-}
-
 /* Styling for the repo info inside the list item */
 .repo-info {
   margin-bottom: 10px;
@@ -321,48 +284,29 @@ nav li:hover {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 100%; /* Allow full width to be flexible */
-  max-width: 300px; /* Maximum width to maintain a consistent size */
-  min-width: 300px; /* Minimum width to ensure cards don't shrink below this */
+  width: 100%;
+  max-width: 300px;
+  min-width: 300px;
   border: 1px solid #f6f5f740; /* Subtle border */
   padding: 1.5rem;
   background-color: #212429;
   border-radius: 10px;
   transition: all 0.5s ease-in-out;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  position: relative; /* Create a positioning context for absolute positioning */
 }
 
 .favorites-item:hover {
   transform: scale(105%); /* Slight zoom effect on hover */
 }
 
-/* Styling for the repo info inside the list item */
-.repo-info {
-  margin-bottom: 10px;
-}
-
-.repo-name a {
-  font-size: 18px;
-  font-weight: bold;
-  color: #57c4db; /* Light blue for repo name */
-  text-decoration: none;
-}
-
-.repo-description {
-  color: #b6b6d5; /* Lighter grey for description */
-  margin: 8px 0;
-}
-
-.repo-stats {
-  color: #f6f5f7d5; /* Light grey text */
-  font-size: 14px;
-}
-
-/* Remove favorite button */
 .favorites-remove-btn {
+  position: absolute;
+  top: -10px; /* Adjust this value based on design needs */
+  right: -10px; /* Adjust this value based on design needs */
   max-width: 40px;
   padding: 0.5rem;
-  background-color: #212429;
+  background-color: #212429; /* Match card background */
   color: #f6f5f7d5; /* Light text */
   border: 1px solid #f6f5f740;
   box-shadow: 0px 2px 4px #f6f5f740;
@@ -370,10 +314,9 @@ nav li:hover {
   cursor: pointer;
   transition: all 0.2s ease-in-out;
 }
-
 .favorites-remove-btn:hover {
-  color: #57c4db; /* Light blue on hover */
-  border-color: #57c4db;
+  color: red; /* Change text color to red on hover */
+  border-color: red; /* Change border color to red on hover */
 }
 
 .favorites-remove-btn:active {
@@ -394,29 +337,28 @@ nav li:hover {
     grid-template-columns: repeat(2, 1fr); /* Two columns for medium screens */
   }
 }
+
 @media (max-width: 900px) and (min-width: 783px) {
   .favorites-list {
     grid-template-columns: repeat(2, 1fr); /* Two columns for this range */
     gap: 1.5rem; /* Adjust gap if needed */
   }
   .favorites-item {
-    width: calc(
-      50% - 10px
-    ); /* Adjust for two column layout, with gap consideration */
-    min-width: 300px; /* Ensure it still has a minimum width */
-    max-width: none; /* Remove max-width so it can expand */
+    width: calc(50% - 10px); /* Adjust for two-column layout */
+    min-width: 300px; /* Keep minimum width */
   }
 }
 
 @media (max-width: 768px) {
   .favorites-list {
     grid-template-columns: 1fr; /* Single column for mobile */
-    max-width: 100%; /* Ensure full width on smaller screens */
+    justify-content: center; /* Center items when single column */
   }
   .favorites-item {
-    width: 100%; /* Allow the card to use full width on smaller screens */
-    max-width: none; /* Remove max-width to adapt to smaller screens */
+    width: 300px; /* Set fixed width */
+    margin: 0 auto; /* Center the item */
     min-width: 300px; /* Keep minimum width */
+    max-width: 300px; /* Prevent exceeding 300px */
   }
 }
 
