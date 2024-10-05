@@ -4,7 +4,6 @@ import { FavoritesProvider } from "./Components/Favorites/FavoriteContext";
 import Header from "./Components/Header/Header";
 import Home from "./Components/Home/Home";
 import Search from "./Components/Search/Search";
-import About from "./Components/About/About";
 import Favorite from "./Components/Favorites/Favorites";
 
 function App() {
@@ -18,7 +17,6 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/search" element={<Search />} />
             <Route path="/favorite" element={<Favorite />} />
-            <Route path="/about" element={<About />} />
           </Routes>
         </main>
       </Router>
