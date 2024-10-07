@@ -9,7 +9,6 @@ import Favorite from "./Components/Favorites/Favorites";
 function App() {
   return (
     <FavoritesProvider>
-      {" "}
       <Router>
         <Header />
         <main className="main-content">
