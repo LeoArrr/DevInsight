@@ -444,6 +444,7 @@ nav li:hover {
   max-width: 300px;
   min-width: 300px;
   border: 1px solid var(--border-color);
+
   padding: 1.5rem;
   background-color: var(--background-color);
   border-radius: 10px;
