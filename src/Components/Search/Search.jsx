@@ -13,7 +13,13 @@ const Search = () => {
   const [loadingMore, setLoadingMore] = useState(false);
   const [error, setError] = useState(null);
   const { favorites, addFavorite, removeFavorite } = useFavorites();
+  const [loading, setLoading] = useState(false); // For loading state
+  const [recentSearches, setRecentSearches] = useState([]); // For recent searches
 
+
+
+
+  
   const fetchRepositories = async (username, page, perPage) => {
     const repoResponse = await fetch(
       `https://api.github.com/search/repositories?q=user:${username}&page=${page}&per_page=${perPage}`
@@ -27,7 +33,26 @@ const Search = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // if (username.trim() === "") {
+    //   setError("Please enter a GitHub username.");
+   
+    //   setProfile(null);
+    //   setRepositories([]);
+    //   setDisplayedRepositories([]);
+    //   localStorage.removeItem("searchData");
+    //   return; 
+    // }
+  
     setPage(1);
+    setLoading(true); // Set loading to true
+    
+
+    if (!username.trim()) {
+      setError("Please enter a GitHub username.");
+      setLoading(false); // Set loading to false if error
+      return;
+    }
 
     try {
       const userResponse = await fetch(

@@ -12,7 +12,7 @@ const Home = () => {
     <div className="main-container">
       <h1 className="main-heading">DevInsight</h1>
       <p className="welcome-text">
-        Search for GitHub repositories by user, country, or coding language.
+        Search for GitHub repositories by user.
       </p>
       <button onClick={ctaButton} className="cta-button">
         Get Started

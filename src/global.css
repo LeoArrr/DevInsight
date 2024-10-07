@@ -10,7 +10,7 @@
 
 body {
   background-color: #212429;
-  color: #f6f5f7d5; 
+  color: #f6f5f7d5;
   font-size: 13px;
   width: 100%;
   height: 100vh;
@@ -18,13 +18,13 @@ body {
 }
 
 header {
-  color: #b6b6d5; 
+  color: #b6b6d5;
   padding: 16px 32px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   font-family: "Inter", sans-serif;
-  border-bottom: 1px solid #f6f5f740; 
+  border-bottom: 1px solid #f6f5f740;
 }
 
 nav ul {
@@ -42,7 +42,7 @@ nav li {
 }
 
 nav li:hover {
-  color: #57c4db; 
+  color: #57c4db;
   text-decoration: underline;
 }
 
@@ -52,7 +52,25 @@ nav li:hover {
   align-items: center;
   flex-direction: column;
   gap: 40px;
-  color: #f6f5f7d5;/
+  color: #f6f5f7d5;
+  font-size: large;
+}
+
+/*some change is here*/
+
+.welcome-text {
+  color: #dddddd;
+}
+.cta-button {
+  font-size: 25px;
+  font-family: "Inter", sans-serif;
+  letter-spacing: 1px;
+  color: #57c4db;
+  background-color: #000000;
+}
+.cta-button:hover {
+  background-color: #3b2e2e;
+  transform: scale(1.05);
 }
 
 .main-heading {
@@ -75,12 +93,12 @@ nav li:hover {
   width: 550px;
   padding: 10px 15px;
   outline: none;
-  border: 1px solid #f6f5f740; 
+  border: 1px solid #f6f5f740;
   font-size: 18px;
   border-radius: 8px;
-  background-color: #2e3136; 
+  background-color: #2e3136;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  color: #f6f5f7d5; 
+  color: #f6f5f7d5;
   transition: all 0.2s ease;
 }
 
@@ -89,7 +107,7 @@ nav li:hover {
 }
 
 .search-input:focus {
-  border-color: #57c4db; 
+  border-color: #57c4db;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
@@ -99,8 +117,8 @@ nav li:hover {
   border: none;
   outline: none;
   text-align: center;
-  background-color: #57c4db; 
-  color: #f6f5f7d5; 
+  background-color: #57c4db;
+  color: #000000d5;
   border-radius: 6px;
   font-size: 18px;
   font-weight: 600;
@@ -110,8 +128,15 @@ nav li:hover {
 }
 
 .search-btn:hover {
-  background-color: #b6b6d5; 
+  background-color: #0d0d7a;
+  color: #ffffff;
   transform: scale(1.05);
+}
+.per-page-select {
+  font-size: large;
+  width: 55px;
+  padding: 5px 0;
+  background-color: #57c4db;
 }
 
 .error-msg {
@@ -124,7 +149,7 @@ nav li:hover {
   width: 720px;
   margin: 0 auto;
   padding: 20px 30px;
-  background: #2e3136; 
+  background: #2e3136;
   border-radius: 10px;
   font-size: 15px;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
@@ -141,7 +166,7 @@ nav li:hover {
 .profile-avatar {
   width: 90px;
   border-radius: 50px;
-  border: 1px solid #57c4db; 
+  border: 1px solid #57c4db;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
@@ -166,7 +191,7 @@ nav li:hover {
   height: 100px;
   width: 500px;
   border-radius: 10px;
-  background: #212429; 
+  background: #212429;
   font-size: 13px;
   text-align: center;
   box-shadow: 0 16px 30px -10px rgba(0, 0, 0, 0.2);
@@ -191,7 +216,7 @@ nav li:hover {
   margin: 15px 0;
   padding: 10px;
   background: #2e3136;
-  border: 1px solid #f6f5f740; 
+  border: 1px solid #f6f5f740;
   border-radius: 8px;
   transition: all 0.3s ease;
 }
@@ -201,21 +226,22 @@ nav li:hover {
 }
 
 .repo-name {
-  font-size: 18px;
+  font-size: 22px;
   font-weight: bold;
-  color: #57c4db; 
+  color: #57c4db;
   text-decoration: none;
 }
 
 .repo-description {
   color: #b6b6d5;
+  font-size: 18px;
   margin: 8px 0;
 }
 
 .repo-favorite-btn {
   padding: 6px 10px;
-  background-color: #57c4db; 
-  color: #f6f5f7d5; 
+  background-color: #57c4db;
+  color: #000000d5;
   border: none;
   border-radius: 6px;
   cursor: pointer;
@@ -224,13 +250,14 @@ nav li:hover {
 }
 
 .repo-favorite-btn:hover {
-  background-color: #b6b6d5; 
+  background-color: #20208a;
+  color: #ffffff;
   transform: scale(1.05);
 }
 
 .repo-separator {
   margin-top: 10px;
-  border: 1px solid #f6f5f740; 
+  border: 1px solid #f6f5f740;
 }
 
 /* Styling for the repo info inside the list item */
@@ -241,12 +268,12 @@ nav li:hover {
 .repo-name a {
   font-size: 18px;
   font-weight: bold;
-  color: #57c4db; 
+  color: #57c4db;
   text-decoration: none;
 }
 
 .repo-description {
-  color: #b6b6d5; 
+  color: #b6b6d5;
   margin: 8px 0;
 }
 
@@ -269,10 +296,10 @@ nav li:hover {
 
 .favorites-list {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); 
+  grid-template-columns: repeat(3, 1fr);
   justify-content: center;
-  justify-items: center; 
-  gap: 2rem; 
+  justify-items: center;
+  gap: 2rem;
   row-gap: 1.5rem;
   padding: 0;
   list-style: none;
@@ -287,7 +314,7 @@ nav li:hover {
   width: 100%;
   max-width: 300px;
   min-width: 300px;
-  border: 1px solid #f6f5f740; 
+  border: 1px solid #f6f5f740;
   padding: 1.5rem;
   background-color: #212429;
   border-radius: 10px;
@@ -297,17 +324,17 @@ nav li:hover {
 }
 
 .favorites-item:hover {
-  transform: scale(105%); 
+  transform: scale(105%);
 }
 
 .favorites-remove-btn {
   position: absolute;
-  top: -10px; 
-  right: -10px; 
+  top: -10px;
+  right: -10px;
   max-width: 40px;
   padding: 0.5rem;
-  background-color: #212429; 
-  color: #f6f5f7d5; 
+  background-color: #212429;
+  color: #f6f5f7d5;
   border: 1px solid #f6f5f740;
   box-shadow: 0px 2px 4px #f6f5f740;
   border-radius: 4px;
@@ -315,8 +342,8 @@ nav li:hover {
   transition: all 0.2s ease-in-out;
 }
 .favorites-remove-btn:hover {
-  color: red; 
-  border-color: red; 
+  color: red;
+  border-color: red;
 }
 
 .favorites-remove-btn:active {
@@ -340,25 +367,25 @@ nav li:hover {
 
 @media (max-width: 900px) and (min-width: 783px) {
   .favorites-list {
-    grid-template-columns: repeat(2, 1fr); 
+    grid-template-columns: repeat(2, 1fr);
     gap: 1.5rem;
   }
   .favorites-item {
     width: calc(50% - 10px);
-    min-width: 300px; 
+    min-width: 300px;
   }
 }
 
 @media (max-width: 768px) {
   .favorites-list {
-    grid-template-columns: 1fr; 
-    justify-content: center; 
+    grid-template-columns: 1fr;
+    justify-content: center;
   }
   .favorites-item {
-    width: 300px; 
-    margin: 0 auto; 
-    min-width: 300px; 
-    max-width: 300px; 
+    width: 300px;
+    margin: 0 auto;
+    min-width: 300px;
+    max-width: 300px;
   }
 }
 
@@ -367,10 +394,10 @@ nav li:hover {
     font-size: 20px;
   }
   .favorites-list {
-    grid-template-columns: 1fr; 
+    grid-template-columns: 1fr;
   }
   .favorites-item {
-    padding: 1rem; 
+    padding: 1rem;
   }
   .search-input {
     width: 250px;
@@ -403,3 +430,36 @@ nav li:hover {
   }
 }
 
+/* footer */
+.app-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.main-content {
+  flex: 1;
+}
+
+.footer {
+  background-color: #162d44;
+  color: #ffffff;
+  padding: 20px 0;
+  text-align: center;
+  border-top: 1px solid #ccc;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+}
+
+.footer-content p {
+  margin: 5px 0;
+}
+
+.footer-link {
+  color: #00ffff;
+  text-decoration: none;
+}
+
+.footer-link:hover {
+  color: #bb00c2;
+}
