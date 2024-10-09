@@ -1,7 +1,7 @@
 # DevInsight - GitHub Profile & Repository Explorer
 DevInsight is a React-based web application that allows users to search for GitHub profiles and repositories, add repositories to favorites, and explore recent searches. It's a sleek, intuitive tool designed to streamline the process of discovering and managing GitHub repositories for developers.
 
-# his project was developed by LeoArrr, Fabrice, and ebrahim08.
+# This project was developed by LeoArrr, Fabrice, and ebrahim08.
 
 ## 📸  Demo
 ![top pic](<Picture/Screenshot from 2024-10-08 13-40-04.png>) 
