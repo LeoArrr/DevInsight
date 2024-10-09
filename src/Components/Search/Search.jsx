@@ -23,7 +23,15 @@ const Search = () => {
       }
     );
 
-    if (!repoResponse.ok) {
+    if (repoResponse.status === 401) {
+      throw new Error("Unauthorized: Check your GitHub token");
+    } else if (repoResponse.status === 403) {
+      throw new Error(
+        "Forbidden: You don't have permission to access this resource. Check your access token or rate limits."
+      );
+    } else if (repoResponse.status === 404) {
+      throw new Error("Not Found: No repositories found for this user.");
+    } else if (!repoResponse.ok) {
       throw new Error("Repositories Not Found");
     }
 
@@ -31,7 +39,6 @@ const Search = () => {
     if (repoData.length === 0) {
       throw new Error("No more repositories found");
     }
-    console.log(repoData);
     return repoData;
   };
 
