@@ -13,7 +13,7 @@ const Search = () => {
   const [error, setError] = useState(null);
   const { favorites, addFavorite, removeFavorite } = useFavorites();
 
-  const fetchRepositories = async (username, data, perPage) => {
+  const fetchRepos = async (username, data, perPage) => {
     const repoResponse = await fetch(
       `https://api.github.com/users/${username}/repos?page=${data}&per_page=${perPage}`
     );
@@ -52,7 +52,7 @@ const Search = () => {
       setError(null);
 
       // Fetch repositories for the user
-      const repos = await fetchRepositories(username, 1, perPage);
+      const repos = await fetchRepos(username, 1, perPage);
       setRepositories(repos);
 
       // Save data to local storage
@@ -83,7 +83,7 @@ const Search = () => {
       setLoadingMore(true); // Loading state to true to prevent ongoing search
       const nextData = data + 1;
 
-      const moreRepos = await fetchRepositories(username, nextData, perPage);
+      const moreRepos = await fetchRepos(username, nextData, perPage);
 
       setRepositories((prevRepos) => [...prevRepos, ...moreRepos]);
       setData(nextData);
