@@ -1,84 +1,76 @@
 import React, { useState, useEffect } from "react";
 import { FaMapMarkerAlt } from "react-icons/fa";
-import { PiBuildingsFill } from "react-icons/pi";
 import { useFavorites } from "../Favorites/FavoriteContext";
+import { FaGithub } from "react-icons/fa";
 
 const Search = () => {
   const [username, setUsername] = useState("");
   const [profile, setProfile] = useState(null);
   const [repositories, setRepositories] = useState([]);
   const [displayedRepositories, setDisplayedRepositories] = useState([]);
-  const [page, setPage] = useState(1);
+  const [data, setData] = useState(1);
   const [perPage, setPerPage] = useState(10);
   const [loadingMore, setLoadingMore] = useState(false);
   const [error, setError] = useState(null);
   const { favorites, addFavorite, removeFavorite } = useFavorites();
-  const [loading, setLoading] = useState(false); // For loading state
-  const [recentSearches, setRecentSearches] = useState([]); // For recent searches
 
-
-
-
-  
-  const fetchRepositories = async (username, page, perPage) => {
+  const fetchRepositories = async (username, data, perPage) => {
     const repoResponse = await fetch(
-      `https://api.github.com/search/repositories?q=user:${username}&page=${page}&per_page=${perPage}`
+      `https://api.github.com/users/${username}/repos?page=${data}&per_page=${perPage}`
     );
+
+    // Check if the response is not okay
     if (!repoResponse.ok) {
       throw new Error("Repositories Not Found");
     }
+
     const repoData = await repoResponse.json();
-    return repoData.items;
+    // Check if there are no repositories
+    if (repoData.length === 0) {
+      throw new Error("No repositories found");
+    }
+
+    return repoData;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // if (username.trim() === "") {
-    //   setError("Please enter a GitHub username.");
-   
-    //   setProfile(null);
-    //   setRepositories([]);
-    //   setDisplayedRepositories([]);
-    //   localStorage.removeItem("searchData");
-    //   return; 
-    // }
-  
-    setPage(1);
-    setLoading(true); // Set loading to true
-    
-
-    if (!username.trim()) {
-      setError("Please enter a GitHub username.");
-      setLoading(false); // Set loading to false if error
-      return;
-    }
+    setData(1);
 
     try {
+      // Fetch the user data
       const userResponse = await fetch(
         `https://api.github.com/users/${username}`
       );
+
+      // If user does not exist, throw an error
       if (!userResponse.ok) {
-        throw new Error("User Not Found");
+        throw new Error("User  Not Found");
       }
+
       const userData = await userResponse.json();
       setProfile(userData);
       setError(null);
 
+      // Fetch repositories for the user
       const repos = await fetchRepositories(username, 1, perPage);
       setRepositories(repos);
       setDisplayedRepositories(repos.slice(0, perPage));
+
+      // Save data to local storage
       localStorage.setItem(
         "searchData",
         JSON.stringify({ username, profile: userData, repositories: repos })
       );
     } catch (error) {
+      setError(error.message);
       setProfile(null);
       setRepositories([]);
-      setError(error.message);
+      setIsSearching(false);
     }
   };
-  //runs after compnents tocks up
+
+  // Runs after component mounts
   useEffect(() => {
     const savedSearchData = localStorage.getItem("searchData");
     if (savedSearchData) {
@@ -92,16 +84,14 @@ const Search = () => {
 
   const loadMoreRepositories = async () => {
     try {
-      setLoadingMore(true);
-      const nextPage = page + 1;
+      setLoadingMore(true); // Loading state to true to prevent ongoing search
+      const nextData = data + 1;
 
-      const moreRepos = await fetchRepositories(username, nextPage, perPage);
+      const moreRepos = await fetchRepositories(username, nextData, perPage); // Updated to use nextData
 
       setRepositories((prevRepos) => [...prevRepos, ...moreRepos]);
-
       setDisplayedRepositories((prevRepos) => [...prevRepos, ...moreRepos]);
-
-      setPage(nextPage);
+      setData(nextData);
     } catch (error) {
       setError("Unable to load more repositories.");
     } finally {
@@ -119,8 +109,8 @@ const Search = () => {
   };
 
   return (
-    <div className="main-container">
-      <h1 className="main-heading">DevInsight</h1>
+    <div className="main-container-search">
+      <h1 className="main-heading-search">DevInsight</h1>
 
       <form className="search-form" onSubmit={handleSubmit}>
         <select
@@ -175,6 +165,14 @@ const Search = () => {
               <p className="profile-bio">{profile.bio || "No bio available"}</p>
 
               <div className="profile-stats">
+                <a
+                  href="https://github.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="github-icon"
+                >
+                  <FaGithub className="github-icon-search" />
+                </a>
                 <div>
                   <p>Repositories</p>
                   <p className="stats">{profile.public_repos}</p>
@@ -245,4 +243,3 @@ const Search = () => {
 };
 
 export default Search;
-
