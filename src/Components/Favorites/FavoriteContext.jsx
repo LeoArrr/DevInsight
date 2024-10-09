@@ -10,7 +10,7 @@ export const useFavorites = () => {
 
 // Provider component
 export const FavoritesProvider = ({ children }) => {
-  const [favorites, setFavorites] = useState([]);
+  const [favorites, setFavorites] = useState([]); //set - update
 
   // Load favorites from local storage
   useEffect(() => {
