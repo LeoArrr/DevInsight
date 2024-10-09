@@ -88,7 +88,12 @@ const Search = () => {
     try {
       setLoadingMore(true); // Set loading state
       const nextData = data + 1;
-
+      console.log(
+        "Loading more repositories for:",
+        username,
+        "Page:",
+        nextData
+      );
       const moreRepos = await fetchRepos(username, nextData, perPage);
       setRepositories((prevRepos) => [...prevRepos, ...moreRepos]);
       setData(nextData);
