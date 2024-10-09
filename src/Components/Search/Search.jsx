@@ -1,32 +1,30 @@
 import React, { useState, useEffect } from "react";
 import { FaMapMarkerAlt } from "react-icons/fa";
-import { useFavorites } from "../Favorites/FavoriteContext"; // clean code, clean way to manage favorites
+import { useFavorites } from "../Favorites/FavoriteContext";
 import { FaGithub } from "react-icons/fa";
 
 const Search = () => {
   const [username, setUsername] = useState("");
   const [profile, setProfile] = useState(null);
   const [repositories, setRepositories] = useState([]);
-  const [data, setData] = useState(1);
+  const [data, setData] = useState(1); // Track pagination
   const [perPage, setPerPage] = useState(10);
   const [loadingMore, setLoadingMore] = useState(false);
   const [error, setError] = useState(null);
   const { favorites, addFavorite, removeFavorite } = useFavorites();
 
-  const fetchRepos = async (username, data, perPage) => {
+  const fetchRepos = async (username, page, perPage) => {
     const repoResponse = await fetch(
-      `https://api.github.com/users/${username}/repos?page=${data}&per_page=${perPage}`
+      `https://api.github.com/users/${username}/repos?page=${page}&per_page=${perPage}`
     );
 
-    // Check if the response is not okay
     if (!repoResponse.ok) {
       throw new Error("Repositories Not Found");
     }
 
     const repoData = await repoResponse.json();
-    // Check if there are no repositories
     if (repoData.length === 0) {
-      throw new Error("No repositories found");
+      throw new Error("No more repositories found");
     }
 
     return repoData;
@@ -34,15 +32,13 @@ const Search = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setData(1);
+    setData(1); // Reset to the first page
 
     try {
-      // Fetch the user data
       const userResponse = await fetch(
         `https://api.github.com/users/${username}`
       );
 
-      // If user does not exist, throw an error
       if (!userResponse.ok) {
         throw new Error("User Not Found");
       }
@@ -51,7 +47,6 @@ const Search = () => {
       setProfile(userData);
       setError(null);
 
-      // Fetch repositories for the user
       const repos = await fetchRepos(username, 1, perPage);
       setRepositories(repos);
 
@@ -67,7 +62,6 @@ const Search = () => {
     }
   };
 
-  // Runs after component mounts
   useEffect(() => {
     const savedSearchData = localStorage.getItem("searchData");
     if (savedSearchData) {
@@ -80,17 +74,16 @@ const Search = () => {
 
   const loadMoreRepositories = async () => {
     try {
-      setLoadingMore(true); // Loading state to true to prevent ongoing search
+      setLoadingMore(true); // Set loading state
       const nextData = data + 1;
 
       const moreRepos = await fetchRepos(username, nextData, perPage);
-
       setRepositories((prevRepos) => [...prevRepos, ...moreRepos]);
       setData(nextData);
     } catch (error) {
-      setError("Unable to load more repositories.");
+      setError(error.message);
     } finally {
-      setLoadingMore(false);
+      setLoadingMore(false); // Reset loading state
     }
   };
 
@@ -163,7 +156,7 @@ const Search = () => {
                 <a
                   href="https://github.com/"
                   target="_blank"
-                  rel=" noreferrer"
+                  rel="noreferrer"
                   className="github-icon"
                 >
                   <FaGithub className="github-icon-search" />
@@ -196,34 +189,30 @@ const Search = () => {
             <div>
               <h3>Repositories:</h3>
               <ul className="repo-list">
-                {repositories.slice(0, perPage).map(
-                  (
-                    repo // Using repositories directly
-                  ) => (
-                    <li key={repo.id} className="repo-item">
-                      <a
-                        href={repo.html_url}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="repo-name"
-                      >
-                        {repo.name}
-                      </a>
-                      <p className="repo-description">
-                        {repo.description || "No description available"}
-                      </p>
-                      <button
-                        onClick={() => handleFavorites(repo)}
-                        className="repo-favorite-btn"
-                      >
-                        {favorites.find((fav) => fav.id === repo.id)
-                          ? "Remove from Favorites"
-                          : "Add to Favorites"}
-                      </button>
-                      <hr className="repo-separator" />
-                    </li>
-                  )
-                )}
+                {repositories.map((repo) => (
+                  <li key={repo.id} className="repo-item">
+                    <a
+                      href={repo.html_url}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="repo-name"
+                    >
+                      {repo.name}
+                    </a>
+                    <p className="repo-description">
+                      {repo.description || "No description available"}
+                    </p>
+                    <button
+                      onClick={() => handleFavorites(repo)}
+                      className="repo-favorite-btn"
+                    >
+                      {favorites.find((fav) => fav.id === repo.id)
+                        ? "Remove from Favorites"
+                        : "Add to Favorites"}
+                    </button>
+                    <hr className="repo-separator" />
+                  </li>
+                ))}
               </ul>
 
               <button
