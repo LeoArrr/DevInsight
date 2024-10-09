@@ -13,9 +13,14 @@ const Search = () => {
   const [error, setError] = useState(null);
   const { favorites, addFavorite, removeFavorite } = useFavorites();
 
-  const fetchRepos = async (username, page, perPage) => {
+  const fetchRepos = async (username, perPage, page) => {
     const repoResponse = await fetch(
-      `https://api.github.com/users/${username}/repos?page=${page}&per_page=${perPage}`
+      `https://api.github.com/users/${username}/repos?page=${page}&per_page=${perPage}`,
+      {
+        headers: {
+          Authorization: `Bearer ${import.meta.env.VITE_GITHUB_TOKEN}`,
+        },
+      }
     );
 
     if (!repoResponse.ok) {
@@ -26,7 +31,7 @@ const Search = () => {
     if (repoData.length === 0) {
       throw new Error("No more repositories found");
     }
-
+    console.log(repoData);
     return repoData;
   };
 
