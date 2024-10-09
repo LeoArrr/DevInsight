@@ -1,18 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { FaMapMarkerAlt } from "react-icons/fa";
-import { useFavorites } from "../Favorites/FavoriteContext"; //clean code,clean way to manage favorite
+import { useFavorites } from "../Favorites/FavoriteContext"; // clean code, clean way to manage favorites
 import { FaGithub } from "react-icons/fa";
 
 const Search = () => {
   const [username, setUsername] = useState("");
   const [profile, setProfile] = useState(null);
   const [repositories, setRepositories] = useState([]);
-  const [displayedRepositories, setDisplayedRepositories] = useState([]);
   const [data, setData] = useState(1);
   const [perPage, setPerPage] = useState(10);
   const [loadingMore, setLoadingMore] = useState(false);
   const [error, setError] = useState(null);
-  const { favorites, addFavorite, removeFavorite } = useFavorites(); //by separating no prop drilling needed-yey
+  const { favorites, addFavorite, removeFavorite } = useFavorites();
 
   const fetchRepositories = async (username, data, perPage) => {
     const repoResponse = await fetch(
@@ -45,7 +44,7 @@ const Search = () => {
 
       // If user does not exist, throw an error
       if (!userResponse.ok) {
-        throw new Error("User  Not Found");
+        throw new Error("User Not Found");
       }
 
       const userData = await userResponse.json();
@@ -55,7 +54,6 @@ const Search = () => {
       // Fetch repositories for the user
       const repos = await fetchRepositories(username, 1, perPage);
       setRepositories(repos);
-      setDisplayedRepositories(repos.slice(0, perPage));
 
       // Save data to local storage
       localStorage.setItem(
@@ -66,7 +64,6 @@ const Search = () => {
       setError(error.message);
       setProfile(null);
       setRepositories([]);
-      setIsSearching(false);
     }
   };
 
@@ -75,7 +72,6 @@ const Search = () => {
     const savedSearchData = localStorage.getItem("searchData");
     if (savedSearchData) {
       const { username, profile, repositories } = JSON.parse(savedSearchData);
-      setDisplayedRepositories(repositories.slice(0, perPage));
       setUsername(username);
       setProfile(profile);
       setRepositories(repositories);
@@ -87,10 +83,9 @@ const Search = () => {
       setLoadingMore(true); // Loading state to true to prevent ongoing search
       const nextData = data + 1;
 
-      const moreRepos = await fetchRepositories(username, nextData, perPage); // Updated to use nextData
+      const moreRepos = await fetchRepositories(username, nextData, perPage);
 
       setRepositories((prevRepos) => [...prevRepos, ...moreRepos]);
-      setDisplayedRepositories((prevRepos) => [...prevRepos, ...moreRepos]);
       setData(nextData);
     } catch (error) {
       setError("Unable to load more repositories.");
@@ -100,7 +95,7 @@ const Search = () => {
   };
 
   const handleFavorites = (repo) => {
-    const isFavorite = favorites.find((fav) => fav.id === repo.id); //fav.id - each fav repo - repo.id -id of repo
+    const isFavorite = favorites.find((fav) => fav.id === repo.id);
     if (isFavorite) {
       removeFavorite(repo);
     } else {
@@ -115,7 +110,7 @@ const Search = () => {
       <form className="search-form" onSubmit={handleSubmit}>
         <select
           value={perPage}
-          onChange={(e) => setPerPage(Number(e.target.value))} //convert to# before passing
+          onChange={(e) => setPerPage(Number(e.target.value))}
           className="per-page-select"
         >
           <option value={5}>5</option>
@@ -201,30 +196,34 @@ const Search = () => {
             <div>
               <h3>Repositories:</h3>
               <ul className="repo-list">
-                {displayedRepositories.map((repo) => (
-                  <li key={repo.id} className="repo-item">
-                    <a
-                      href={repo.html_url}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="repo-name"
-                    >
-                      {repo.name}
-                    </a>
-                    <p className="repo-description">
-                      {repo.description || "No description available"}
-                    </p>
-                    <button
-                      onClick={() => handleFavorites(repo)}
-                      className="repo-favorite-btn"
-                    >
-                      {favorites.find((fav) => fav.id === repo.id)
-                        ? "Remove from Favorites"
-                        : "Add to Favorites"}
-                    </button>
-                    <hr className="repo-separator" />
-                  </li>
-                ))}
+                {repositories.slice(0, perPage).map(
+                  (
+                    repo // Using repositories directly
+                  ) => (
+                    <li key={repo.id} className="repo-item">
+                      <a
+                        href={repo.html_url}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="repo-name"
+                      >
+                        {repo.name}
+                      </a>
+                      <p className="repo-description">
+                        {repo.description || "No description available"}
+                      </p>
+                      <button
+                        onClick={() => handleFavorites(repo)}
+                        className="repo-favorite-btn"
+                      >
+                        {favorites.find((fav) => fav.id === repo.id)
+                          ? "Remove from Favorites"
+                          : "Add to Favorites"}
+                      </button>
+                      <hr className="repo-separator" />
+                    </li>
+                  )
+                )}
               </ul>
 
               <button
