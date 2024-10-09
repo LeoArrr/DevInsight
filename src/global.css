@@ -87,28 +87,6 @@ nav li:hover {
   margin: 0 auto;
 }
 
-.cta-button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: var(--accent-color);
-  color: var(--text-color);
-  border: none;
-  border-radius: 6px;
-  font-size: 18px;
-  font-weight: 600;
-  padding: 12px 24px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 12px var(--box-shadow-color);
-  margin: 0 auto;
-}
-
-.cta-button:hover {
-  background-color: var(--hover-background-color);
-  transform: scale(1.05);
-}
-
 .github-icon {
   margin-right: 8px;
   font-size: 80px;
@@ -224,9 +202,11 @@ nav li:hover {
   justify-content: flex-start;
   align-items: flex-start;
 }
+
 .profile-username {
   color: indianred;
 }
+
 .profile-avatar {
   width: 90px;
   border-radius: 50px;
@@ -268,12 +248,14 @@ nav li:hover {
   font-size: 28px;
   font-weight: 700;
 }
+
 .github-icon-search {
   display: flex;
   font-size: 50px;
   justify-content: flex-end;
   margin-right: 10px;
 }
+
 .repo-list {
   list-style-type: none;
   max-height: 400px;
@@ -376,7 +358,7 @@ nav li:hover {
   font-weight: 600;
   padding: 12px 24px;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.3s ease;
+  transition: 0.3s ease;
   margin: 0 auto;
 }
 
@@ -479,13 +461,32 @@ nav li:hover {
 .favorites-remove-btn:active {
   transform: scale(95%);
 }
+.cta-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(to top, indianred 0%, var(--accent-color) 100%);
+  color: var(--text-muted-color);
+  border: none;
+  border-radius: 6px;
+  font-size: 18px;
+  font-weight: 600;
+  padding: 12px 24px;
+  cursor: pointer;
+  transition: 0.3s ease;
+  margin: 0 auto;
+}
 
+.cta-button:hover {
+  transform: scale(1.1);
+}
 /* No favorites message */
 .no-favorites {
   text-align: center;
   font-size: 18px;
   color: var(--text-color);
   margin-top: 20px;
+  color: indianred;
 }
 
 /* Responsive Adjustments */

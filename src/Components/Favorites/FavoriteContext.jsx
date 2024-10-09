@@ -12,7 +12,7 @@ export const useFavorites = () => {
 export const FavoritesProvider = ({ children }) => {
   const [favorites, setFavorites] = useState([]);
 
-  // Load favorites from local storage when the component mounts
+  // Load favorites from local storage
   useEffect(() => {
     const savedFavorites = localStorage.getItem("favorites");
     if (savedFavorites) {

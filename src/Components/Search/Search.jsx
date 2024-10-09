@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { FaMapMarkerAlt } from "react-icons/fa";
-import { useFavorites } from "../Favorites/FavoriteContext";
+import { useFavorites } from "../Favorites/FavoriteContext"; //clean code,clean way to manage favorite
 import { FaGithub } from "react-icons/fa";
 
 const Search = () => {
@@ -12,7 +12,7 @@ const Search = () => {
   const [perPage, setPerPage] = useState(10);
   const [loadingMore, setLoadingMore] = useState(false);
   const [error, setError] = useState(null);
-  const { favorites, addFavorite, removeFavorite } = useFavorites();
+  const { favorites, addFavorite, removeFavorite } = useFavorites(); //by separating no prop drilling needed-yey
 
   const fetchRepositories = async (username, data, perPage) => {
     const repoResponse = await fetch(
@@ -100,7 +100,7 @@ const Search = () => {
   };
 
   const handleFavorites = (repo) => {
-    const isFavorite = favorites.find((fav) => fav.id === repo.id);
+    const isFavorite = favorites.find((fav) => fav.id === repo.id); //fav.id - each fav repo - repo.id -id of repo
     if (isFavorite) {
       removeFavorite(repo);
     } else {
@@ -115,7 +115,7 @@ const Search = () => {
       <form className="search-form" onSubmit={handleSubmit}>
         <select
           value={perPage}
-          onChange={(e) => setPerPage(Number(e.target.value))}
+          onChange={(e) => setPerPage(Number(e.target.value))} //convert to# before passing
           className="per-page-select"
         >
           <option value={5}>5</option>
@@ -243,4 +243,3 @@ const Search = () => {
 };
 
 export default Search;
-
